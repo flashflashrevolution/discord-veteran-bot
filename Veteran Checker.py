@@ -323,10 +323,11 @@ async def on_message(message):
     """
     if not isinstance(message.channel, discord.channel.DMChannel):
         if message.content.startswith("@everyone"):
-            # Checks if the Discord user is an admin or mod.
+            # Checks if the Discord user is an admin, mod, or staff.
+            staff = discord.utils.get(message.author.roles, name="FFR Staff")
             admin = discord.utils.get(message.author.roles, name="Discord Admin")
             mod = discord.utils.get(message.author.roles, name="Discord Mod")
-            if mod is None and admin is None:
+            if mod is None and admin is None and staff is None:
 
                 # Makes the message content all lower case to easily parse.
                 check: str = message.content.lower()
